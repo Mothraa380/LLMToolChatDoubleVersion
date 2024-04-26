@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boeing vs Airbus</title>
+<style>
+  body { margin: 0; font-family: Arial, sans-serif; }
+  .split { display: flex; height: 100vh; }
+  .boeing { flex: 50%; background-color: blue; color: white; padding: 20px; }
+  .airbus { flex: 50%; background-color: red; color: white; padding: 20px; }
+  .company { cursor: pointer; font-size: 2em; }
+  .plane-list, .plane-details, .back { display: none; }
+  .plane-list ul { list-style: none; padding: 0; }
+  .plane { cursor: pointer; }
+</style>
+</head>
+<body>
+
+<div class="split">
+  <div class="boeing">
+    <div class="company" onclick="showPlanes('boeing')">Boeing</div>
+    <div class="plane-list" id="boeing-planes">
+      <!-- List of Boeing planes would go here -->
+      <ul>
+        <li class="plane" onclick="showDetails('boeing', '737')">737</li>
+        <li class="plane" onclick="showDetails('boeing', '747')">747</li>
+        <!-- ... other planes ... -->
+      </ul>
+      <button class="back" onclick="hideDetails('boeing')">Back</button>
+    </div>
+    <div class="plane-details" id="boeing-details">
+      <!-- Specific plane details would be populated here -->
+    </div>
+  </div>
+  <div class="airbus">
+    <div class="company" onclick="showPlanes('airbus')">Airbus</div>
+    <div class="plane-list" id="airbus-planes">
+      <!-- List of Airbus planes would go here -->
+      <ul>
+        <li class="plane" onclick="showDetails('airbus', 'A320')">A320</li>
+        <li class="plane" onclick="showDetails('airbus', 'A380')">A380</li>
+        <!-- ... other planes ... -->
+      </ul>
+      <button class="back" onclick="hideDetails('airbus')">Back</button>
+    </div>
+    <div class="plane-details" id="airbus-details">
+      <!-- Specific plane details would be populated here -->
+    </div>
+  </div>
+</div>
+
+<script>
+function showPlanes(company) {
+  document.getElementById(company + '-planes').style.display = 'block';
+  document.querySelector('.' + company + ' .company').style.display = 'none';
+}
+
+function showDetails(company, model) {
+  var data = {
+    'boeing': { '737': 'Basic info about Boeing 737', '747': 'Basic info about Boeing 747' },
+    'airbus': { 'A320': 'Basic info about Airbus A320', 'A380': 'Basic info about Airbus A380' }
+  };
+  document.getElementById(company + '-planes').style.display = 'none';
+  var detailsDiv = document.getElementById(company + '-details');
+  detailsDiv.innerHTML = data[company][model]; // You would want more detailed templates here
+  detailsDiv.style.display = 'block';
+}
+
+function hideDetails(company) {
+  document.getElementById(company + '-planes').style.display = 'none';
+  document.getElementById(company + '-details').style.display = 'none';
+  document.querySelector('.' + company + ' .company').style.display = 'block';
+}
+</script>
+
+</body>
+</html>
